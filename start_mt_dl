@@ -1,0 +1,64 @@
+tell application "iTerm2"
+  tell current window
+    -- es
+    set newTab to (create tab with default profile)
+    tell last tab
+      tell current session
+        write text "title es"
+        write text "cd ~/dev/artirix/dmgt/"
+        write text "./elasticsearch/bin/elasticsearch"
+      end tell
+    end tell
+    
+    -- artillery
+    set newTab to (create tab with default profile)
+    tell last tab
+      tell current session
+        write text "title artillery"
+        write text "cd ~/dev/artirix/artillery/"
+        write text "sbt -Delasticsearch.transport_addresses.0=localhost:9300 -Delasticsearch.cluster.name=mail_travel_tony -Dhttp.port=9010 run"
+      end tell
+    end tell
+    
+    -- data-layer
+    set newTab to (create tab with default profile)
+    tell last tab
+      tell current session
+        write text "title data-layer"
+        write text "cd ~/dev/artirix/dmgt/mt_data_layer/"
+        write text "sbt -Dhttp.port=9020 run"
+      end tell
+    end tell
+    
+    -- restapi
+    set newTab to (create tab with default profile)
+    tell last tab
+      tell current session
+        write text "title restapi"
+        write text "cd ~/dev/artirix/dmgt/restapi/"
+        write text "sbt -Delasticsearch.cluster.name=mail_travel_tony -Ddb.default.url='jdbc:mysql://localhost/hub_mt?useUnicode=yes&characterEncoding=UTF-8' run"
+      end tell
+    end tell
+    
+    -- write api
+    set newTab to (create tab with default profile)
+    tell last tab
+      tell current session
+        write text "title write-api"
+        write text "cd ~/dev/artirix/dmgt/mail_travel_write_api/"
+        write text "bundle && be rails s -p 3090"
+      end tell
+    end tell
+    
+    -- rails
+    set newTab to (create tab with default profile)
+    tell last tab
+      tell current session
+        write text "title rails"
+        write text "cd ~/dev/artirix/dmgt/mail_travel_ui/"
+        write text "bundle && be rails s"
+      end tell
+    end tell
+    
+  end tell
+end tell

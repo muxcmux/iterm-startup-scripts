@@ -1,0 +1,22 @@
+tell application "iTerm2"
+  tell current window
+    -- Rails
+    set newTab to (create tab with default profile)
+    tell last tab
+      tell current session
+        write text "title rails"
+        write text "cd ~/dev/artirix/propertylink/propertylink_reloaded/"
+        write text "bundle && be rails s"
+      end tell
+    end tell
+    -- Grunt
+    set newTab to (create tab with default profile)
+    tell last tab
+      tell current session
+        write text "title grunt"
+        write text "cd ~/dev/artirix/propertylink/propertylink_reloaded/"
+        write text "bower install && grunt"
+      end tell
+    end tell
+  end tell
+end tell

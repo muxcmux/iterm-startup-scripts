@@ -1,0 +1,55 @@
+tell application "iTerm2"
+  tell current window
+    -- es, indexer, pipeline
+    set newTab to (create tab with default profile)
+    tell last tab
+      tell current session
+        write text "title es-and-python"
+        write text "workon artirix"
+        write text "cd ~/dev/artirix/raremark/"
+        write text "foreman s"
+      end tell
+    end tell
+    
+    -- Artillery (tunnel ES first to int)
+    set newTab to (create tab with default profile)
+    tell last tab
+      tell current session
+        write text "title artillery"
+        write text "cd ~/dev/artirix/artillery/ && git checkout master"
+        write text "sbt -Delasticsearch.transport_addresses.0=localhost:9300 -Delasticsearch.cluster.name=raremarktony -Dhttp.port=9010 run"
+      end tell
+    end tell
+    
+    -- data-layer (tunnel ES first to int)
+    set newTab to (create tab with default profile)
+    tell last tab
+      tell current session
+        write text "title data-layer"
+        write text "cd ~/dev/artirix/raremark/raremark-data-layer/"
+        write text "sbt -Dhttp.port=9020 run"
+      end tell
+    end tell
+    
+    -- rails
+    set newTab to (create tab with default profile)
+    tell last tab
+      tell current session
+        write text "title rails"
+        write text "cd ~/dev/artirix/raremark/raremark_ui/"
+        write text "bundle && be guard"
+      end tell
+    end tell
+    
+    -- grunt
+    set newTab to (create tab with default profile)
+    tell last tab
+      tell current session
+        write text "title grunt"
+        write text "cd ~/dev/artirix/raremark/raremark_ui/"
+        write text "bower install && grunt"
+      end tell
+    end tell
+    
+  end tell
+end tell
